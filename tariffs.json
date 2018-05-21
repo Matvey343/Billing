@@ -1,0 +1,49 @@
+{
+  "basic": {
+    "price": 0,
+    "packages": {},
+    "call": {"home": 1, "country": 2, "foreign_countries": 3},
+    "sms": {"home": 1, "country": 2, "foreign_countries": 3},
+    "internet": {"home": 1, "country": 2, "foreign_countries": 3},
+    "service": {}
+  },
+  "normal": {
+    "price": 10,
+    "packages": {
+      "call": {"home": 10},
+      "sms": {"country": 10},
+      "internet": {"country": 10},
+      "voice_mail": {"country": 5}
+    },
+    "call": {"home": 1, "country": 2, "foreign_countries": 3},
+    "sms": {"home": 1, "country": 2, "foreign_countries": 3},
+    "internet": {"home": 1, "country": 2, "foreign_countries": 3},
+    "voice_mail": {"home": 1, "country": 2,"foreign_countries": 3}
+  },
+  "business": {
+    "price": 50,
+    "packages": {
+      "call": {"foreign_countries": 10},
+      "sms": {"foreign_countries": 10},
+      "internet": {"foreign_countries": 10},
+      "voice_mail": {"foreign_countries": 5}
+    },
+    "call": {"home": 1, "country": 2, "foreign_countries": 3},
+    "sms": {"home": 1, "country": 2, "foreign_countries": 3},
+    "internet": {"home": 1, "country": 2, "foreign_countries": 3},
+    "voice_mail": {"home": 1, "country": 2, "foreign_countries": 3}
+  },
+  "no-limit": {
+    "price": 3000,
+    "packages": {
+      "call": {"foreign_countries": Infinity},
+      "sms": {"foreign_countries": Infinity},
+      "internet": {"foreign_countries": Infinity},
+      "voice_mail": {"foreign_countries": Infinity}
+    },
+    "call": {"home": 1, "country": 2, "foreign_countries": 3},
+    "sms": {"home": 1, "country": 2, "foreign_countries": 3},
+    "internet": {"home": 1, "country": 2, "foreign_countries": 3},
+    "voice_mail": {"home": 1, "country": 2, "foreign_countries": 3}
+  }
+}
