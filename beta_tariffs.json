@@ -1,0 +1,31 @@
+{
+  "basic": {
+    "price": 0,
+    "dynamic_position": false,
+    "packages": {},
+    "action": {
+      "call": {"home": 1, "country": 2, "foreign_countries": 3},
+      "sms": {"home": 1, "country": 2, "foreign_countries": 3},
+      "internet": {"home": 1, "country": 2, "foreign_countries": 3},
+      "voice_mail": {"home": 1, "country": 2, "foreign_countries": 3}
+    }
+  },
+  "normal": {
+    "price": 10,
+    "dynamic_position": true,
+
+    "packages": {
+      "call": {"home": 10},
+      "sms": {"country": 10},
+      "internet": {"country": 10},
+      "voice_mail": {"country": 5}
+    },
+
+    "action": {
+      "call": {"home": 1, "country": 2, "foreign_countries": 3},
+      "sms": {"home": 1, "country": 2, "foreign_countries": 3},
+      "internet": {"home": 1, "country": 2, "foreign_countries": 3},
+      "voice_mail": {"home": 1, "country": 2, "foreign_countries": 3}
+    }
+  }
+}
