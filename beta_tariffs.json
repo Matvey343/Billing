@@ -13,14 +13,12 @@
   "normal": {
     "price": 10,
     "dynamic_position": true,
-
     "packages": {
-      "call": {"home": 10},
-      "sms": {"country": 10},
-      "internet": {"country": 10},
-      "voice_mail": {"country": 5}
+      "call": {"home": 3},
+      "sms": {"country": 2},
+      "internet": {"foreign_countries": 1},
+      "voice_mail": {"foreign_countries": 10}
     },
-
     "action": {
       "call": {"home": 1, "country": 2, "foreign_countries": 3},
       "sms": {"home": 1, "country": 2, "foreign_countries": 3},

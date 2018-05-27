@@ -1,66 +1,83 @@
 #!/usr/bin/env python3
 import json
-# import os
-# import shelve
+import os
+import shelve
 # import sys
 # import PyQt5
 # import sqlite3
 
 
 def main():
-    # root_path = 'D:\\python\\test\\'
+    path = os.getcwd() + '\\data_base\\'
+    os.mkdir(path)
+
+    tariffs = {}
     with open('beta_tariffs.json') as f_tariffs:
-        tariffs = {}
         for name_tariff, describe_tariff in json.load(f_tariffs).items():
             tariffs[name_tariff] = Tariff(describe_tariff)
+
     users = {}
     for log in open('log.txt').readline():
         if log[3] is 'registration':
             if log[0] in users: raise Exception('repeated registration')
-            users[log[0]] = User(log)
-        users[log[0]].action(log)
+            users[log[0]] = User(log, tariffs)
 
-# def determine_range_action(from_which, to):
-#     from_which, to = from_which.split(), to.split()
-#     for i in range(from_which):
-#         if from_which[i] == to[i]:
-#             return i
-#     raise Exception()
+        users[log[0]].action(log, tariffs)
+        users[log[0]].add_history(log[1:])
+        
+        with shelve.open(data) as data_base:
+            data_base[log[0]]
+
+
+def determine_range_action(where, to):
+    """determine condition for roaming"""
+    where, to = where.split('_'), to.split('_')
+    k = 0
+    while len(to) > k and where[k] != to[k]: k += 1
+    return k
 
 
 class User(object):
     """Class for user PBX"""
-
-    def __init__(self, log):
+    def __init__(self, log, tariffs):
         self.number = log[0]
         self.balance = 0
         self.history = []
-        self.package = log[4]
-        self.position = log[2]
-
-        self.add_history(log[1:])
+        self.package = tariffs[log[4]]['packages'].copy()
+        self.name_tariff = log[3]
+        if not tariffs[log[4]].dynamic_position:
+            self.position = log[2]
 
     def add_history(self, history):
-        self.history.append(history)
+        pass
 
-    def action(self, log):
-        if log[3] in self.package:  # есть ли это действие в пакете
-            pass
+    def action(self, log, tariffs):
+        if not log[3] in tariffs['action']: # существует ли это действие
+            raise Exception(f'No this action {log[3]}')
+        
+        if log[3] in self.package:  # существует ли это действие в пакете
+            # range_action = determine_range_action(log[2], log[5])
+            # if tariffs[self.name_tariff].action[log[2]]
         else:
             pass
-
-    def change_balanse(self, tariffs, action, solution):
-        pass
 
 
 class Tariff(object):
     """Class for simple work with tariffs"""
-
     def __init__(self, tariffs):
         self.price = tariffs['price']
         self.dynamic_position = tariffs['dynamic_position']
         self.packages = tariffs['packages']
-        self.activity = tariffs['activity']
+        self.action = tariffs['action']
+
+    def change_parametr(self, parametr):
+        d = {
+            'price': self.price = parametr,
+            'dynamic_position': self.dynamic_position = parametr,
+            'packages': self.packages = parametr,
+            'action': self.packages = parametr
+        }
+        d[parametr]
 
 
 if __name__ == '__main__':
@@ -75,4 +92,6 @@ if __name__ == '__main__':
     os.path.exists(filename) - существование файла
     
     raise Exception - восстановление
+    
+    hasattr(t, 'c') - проверить есть ли атрибут c
 """
